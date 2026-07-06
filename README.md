@@ -347,10 +347,10 @@ If you use SafeClawArena in your research, please cite:
 **Code**: https://github.com/sunblaze-ucb/SafeClawArena
 
 ```bibtex
-@misc{safeclawarena2026,
-  title  = {SafeClawArena: An Operating-System Perspective on the Safety of Self-Hosted AI Agents},
-  author = {Peizhi Niu, Shangding Gu, Wenjie Qu, Tianneng Shi, Yuankai Li, Ahmad Tawaha, Hend Alzahrani, Vincent Siu, Boyi Li, Chenguang Wang, Jiaheng Zhang, Basel Alomair, Ming Jin, Muhao Chen, Chi Wang, Costas Spanos, Dawn Song},
-  year   = {2026},
-  journal = {github}
+@article{niu2026understanding,
+  title={Understanding and Evaluating Claw-like Agent Security Through a Computer-Systems Lens},
+  author={Niu, Peizhi and Qu, Wenjie and Gu, Shangding and Shi, Tianneng and Li, Yuankai and Tawaha, Ahmad and Alzahrani, Hend and Siu, Vincent and Li, Boyi and Wang, Chenguang and others},
+  journal={arXiv preprint arXiv:2606.30755},
+  year={2026}
 }
 ```
