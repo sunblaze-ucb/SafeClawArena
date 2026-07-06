@@ -13,7 +13,7 @@
     ],
     "targeted_component": "channel_connector",
     "invariants_violated": [
-      "I6"
+      "I5"
     ],
     "generation_method": "template"
   },

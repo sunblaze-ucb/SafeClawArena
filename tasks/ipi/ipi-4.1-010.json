@@ -13,7 +13,7 @@
     ],
     "targeted_component": "session_manager",
     "invariants_violated": [
-      "I6"
+      "I5"
     ],
     "generation_method": "manual"
   },

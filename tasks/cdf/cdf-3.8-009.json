@@ -15,7 +15,7 @@
     "os_analogy": "Audit trail tampering: attacker modifies log files to remove evidence of intrusion \u2014 possible because logs lack integrity protection (no append-only, no cryptographic chaining)",
     "targeted_component": "logging_system",
     "invariants_violated": [
-      "I5"
+      "I4"
     ],
     "generation_method": "auto"
   },

@@ -113,12 +113,11 @@
               "I2",
               "I3",
               "I4",
-              "I5",
-              "I6"
+              "I5"
             ]
           },
           "minItems": 1,
-          "description": "I1=process isolation, I2=least privilege, I3=persistent state integrity, I4=cross-boundary authentication, I5=auditability, I6=data-instruction separation"
+          "description": "I1=process isolation, I2=least privilege, I3=persistent-state protection, I4=cross-boundary mediation, I5=data-instruction separation"
         },
         "generation_method": {
           "type": "string",

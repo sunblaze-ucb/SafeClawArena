@@ -16,7 +16,7 @@
     "os_analogy": "Uninitialized memory disclosure: a kernel buffer used for one operation is reused without clearing, causing data from the previous operation to leak into an unrelated system call",
     "targeted_component": "context_manager",
     "invariants_violated": [
-      "I2"
+      "I4"
     ],
     "generation_method": "auto"
   },

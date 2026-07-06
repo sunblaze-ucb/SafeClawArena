@@ -15,7 +15,7 @@
     "targeted_component": "document_reasoning",
     "generation_method": "manual",
     "invariants_violated": [
-      "I6"
+      "I5"
     ]
   },
   "environment": {

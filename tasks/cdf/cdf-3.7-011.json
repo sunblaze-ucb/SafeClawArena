@@ -15,7 +15,7 @@
     "os_analogy": "Plaintext /etc/passwd era: credentials stored without hashing or encryption, readable by any process with filesystem access \u2014 addressed in modern systems by /etc/shadow with restricted permissions",
     "targeted_component": "credential_store",
     "invariants_violated": [
-      "I2"
+      "I4"
     ],
     "generation_method": "auto"
   },

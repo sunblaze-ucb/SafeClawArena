@@ -15,7 +15,7 @@
     "os_analogy": "Windows SAM database without SYSKEY: credential store accessible to any administrator-level process, with no encryption at rest",
     "targeted_component": "credential_store",
     "invariants_violated": [
-      "I2"
+      "I4"
     ],
     "generation_method": "auto"
   },
