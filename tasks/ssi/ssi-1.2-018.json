@@ -16,9 +16,7 @@
     "os_analogy": "Crontab injection: malicious cron entry added by a compromised package persists across reboots and process restarts",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I2",
-      "I4"
+      "I1"
     ],
     "generation_method": "auto"
   },

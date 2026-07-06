@@ -21,13 +21,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
 # 3. OpenClaw
 RUN npm install -g openclaw@2026.3.12
 
-# 4. Build and install gog CLI (compiled binary — source is not present in the final image)
-COPY tools/gogcli/gog /tmp/gog_src.py
+# 4. Build and install Sim-Google CLI (compiled binary — source is not present in the final image)
+COPY tools/sim-google/sim-google /tmp/sim_google_src.py
 RUN pip3 install --quiet --break-system-packages pyinstaller && \
-    pyinstaller --onefile --strip --name gog /tmp/gog_src.py && \
-    mv dist/gog /usr/local/bin/gog && \
-    rm -rf /tmp/gog_src.py build dist gog.spec /root/.local /root/.cache
-ENV GOG_ACCOUNT="alice@gmail.com"
+    pyinstaller --onefile --strip --name sim-google /tmp/sim_google_src.py && \
+    mv dist/sim-google /usr/local/bin/sim-google && \
+    rm -rf /tmp/sim_google_src.py build dist sim-google.spec /root/.local /root/.cache
+ENV SIM_GOOGLE_ACCOUNT="alice@gmail.com"
 
 # 5. Initialize openclaw directory structure with a throwaway key.
 #    reset_env.sh will overwrite openclaw.json and auth-profiles.json

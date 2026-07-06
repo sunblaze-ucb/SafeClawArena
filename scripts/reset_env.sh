@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# reset_env.sh — SafeClawBench Benchmark Environment Reset Script
+# reset_env.sh — SafeClawArena Benchmark Environment Reset Script
 #
 # Resets the OpenClaw instance inside Docker container to a clean,
 # reproducible state for benchmark testing.
@@ -242,7 +242,7 @@ if changed:
 " 2>/dev/null || true
 
     docker exec -d "$CONTAINER" bash -c \
-        "export HOME=${_gw_home} GOG_DATA_DIR=/tmp/gog_data && openclaw gateway --port ${GATEWAY_PORT} > /tmp/openclaw-gateway.log 2>&1"
+        "export HOME=${_gw_home} SIM_GOOGLE_DATA_DIR=/tmp/sim_google_data && openclaw gateway --port ${GATEWAY_PORT} > /tmp/openclaw-gateway.log 2>&1"
 
     log "  Gateway start command issued."
 }
@@ -311,7 +311,7 @@ clean_cron_runs_only() {
 
 clean_skills() {
     log "Cleaning skills..."
-    # Remove all preinstalled managed skills except gog (needed by 166+ tasks).
+    # Remove all preinstalled managed skills except sim-google (needed by 166+ tasks).
     # This ensures <available_skills> only contains task-relevant skills,
     # preventing interference from 50+ unrelated preinstalled skills.
     # Auto-detect managed skills directory (differs between OpenClaw and NemoClaw)
@@ -319,8 +319,8 @@ clean_skills() {
     if [ -z "$MANAGED_SKILLS_DIR" ]; then
         MANAGED_SKILLS_DIR="/usr/lib/node_modules/openclaw/skills"
     fi
-    dexec bash -c "for d in ${MANAGED_SKILLS_DIR}/*/; do name=\$(basename \"\$d\"); [ \"\$name\" != 'gog' ] && rm -rf \"\$d\"; done"
-    log_verbose "  Removed: managed skills (kept gog)"
+    dexec bash -c "for d in ${MANAGED_SKILLS_DIR}/*/; do name=\$(basename \"\$d\"); [ \"\$name\" != 'sim-google' ] && rm -rf \"\$d\"; done"
+    log_verbose "  Removed: managed skills (kept sim-google)"
 
     dexec rm -rf "${WORKSPACE}/skills/"
     log_verbose "  Removed: workspace skills"
@@ -344,9 +344,9 @@ clean_logs() {
     log "Cleaning logs..."
     dexec rm -f "${OPENCLAW_HOME}/logs/config-audit.jsonl"
     dexec rm -f /tmp/openclaw-gateway.log
-    dexec rm -f /tmp/gog_calls.jsonl
-    dexec rm -rf /tmp/gog_data
-    log_verbose "  Removed: config-audit.jsonl, gateway log, gog_calls.jsonl, gog_data"
+    dexec rm -f /tmp/sim_google_calls.jsonl
+    dexec rm -rf /tmp/sim_google_data
+    log_verbose "  Removed: config-audit.jsonl, gateway log, sim_google_calls.jsonl, sim_google_data"
 }
 
 clean_attack_artifacts() {
@@ -710,7 +710,7 @@ for mem in env.get("memory_files", []):
     docker_cp_content(content, full_path)
     print(f"  Memory: {path} -> {full_path} ({len(content)} bytes)")
 
-# 2b. Provision pre-injected memory (SPE Cat 2.3, 2.5 — memory/config already tampered before session)
+# 2b. Provision pre-injected memory (PSE Cat 2.3, 2.5 — memory/config already tampered before session)
 pim = env.get("pre_injected_memory", {})
 if pim:
     target = pim.get("target_file", "MEMORY.md")
@@ -799,11 +799,11 @@ if env.get("git_init"):
     dexec(f"cd {workspace} && echo '' >> .env && git add -A && git commit -q -m 'Update configuration for staging environment'")
     print(f"  Git: initialized repo with initial commit")
 
-# 3a. Provision gog data store (emails, calendar events, chat messages, etc.)
-gog_data_dir = "/tmp/gog_data"
+# 3a. Provision sim-google data store (emails, calendar events, chat messages, etc.)
+gog_data_dir = "/tmp/sim_google_data"
 dexec(f"rm -rf {gog_data_dir} && mkdir -p {gog_data_dir}")
 
-for gog_item in env.get("gog_data", []):
+for gog_item in env.get("sim_google_data", []):
     gog_path = gog_item["path"]  # e.g., "gmail/inbox/config-drift.eml"
     gog_content = gog_item.get("content", "")
     full_gog_path = f"{gog_data_dir}/{gog_path}"
@@ -813,7 +813,7 @@ for gog_item in env.get("gog_data", []):
     dexec(f"chmod a+r '{full_gog_path}'")
     print(f"  Gog data: {gog_path} ({len(gog_content)} bytes)")
 
-# Also migrate any workspace files in inbox/ or incoming/ to gog store
+# Also migrate any workspace files in inbox/ or incoming/ to sim-google store
 # (backward compatibility: if tasks still use workspace_files for emails)
 for wf in env.get("workspace_files", []):
     path = wf["path"]
@@ -830,9 +830,9 @@ for wf in env.get("workspace_files", []):
         docker_cp_content(content, gog_path)
         print(f"  Gog data (migrated): {path} -> {gog_path}")
 
-# Set GOG_DATA_DIR for the container environment
+# Set SIM_GOOGLE_DATA_DIR for the container environment
 _user_home = os.path.dirname(openclaw_home)
-dexec(f"echo 'export GOG_DATA_DIR={gog_data_dir}' >> {_user_home}/.bashrc")
+dexec(f"echo 'export SIM_GOOGLE_DATA_DIR={gog_data_dir}' >> {_user_home}/.bashrc")
 
 # 3b. Merge canary profiles into auth-profiles.json (preserves real working keys)
 auth_pf = env.get("auth_profiles_file", {})
@@ -921,7 +921,7 @@ PYTHON_SCRIPT
 # ============================================================================
 main() {
     log "========================================="
-    log "SafeClawBench Environment Reset"
+    log "SafeClawArena Environment Reset"
     log "Mode: ${MODE}  DryRun: ${DRY_RUN}"
     log "========================================="
 

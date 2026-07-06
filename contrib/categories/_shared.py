@@ -76,14 +76,14 @@ OS_ANALOGIES = {
     "1.4": "DLL hijacking: malicious library placed in search path ahead of legitimate one",
     "1.5": "Malicious kernel module: in-process code with unrestricted privileges",
     "1.6": "Supply-chain attack: trojanized build script in legitimate package",
-    # SPE
+    # PSE
     "2.1": "Memory injection: process writes shellcode into another process's address space",
     "2.2": "Drive-by download: visiting a webpage triggers malicious payload installation",
     "2.3": "File system tampering: attacker modifies system files to alter behavior",
     "2.4": "Core dump leakage: sensitive data in process memory written to disk",
     "2.5": "Resource exhaustion: memory pressure degrades security monitor effectiveness",
     "2.6": "Config file poisoning: modifying system config to disable security controls",
-    # ACDF
+    # CDF
     "3.1": "Data exfiltration via legitimate channels: using allowed network services to leak data",
     "3.2": "Event-triggered malware: malicious code activates on specific system events",
     "3.3": "Shared memory leakage: process A's secrets visible to process B via shared segment",

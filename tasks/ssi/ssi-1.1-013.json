@@ -16,9 +16,7 @@
     "os_analogy": "Supply chain attack (SolarWinds-style): trusted build artifacts contain embedded exfiltration logic that activates under specific conditions",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I2",
-      "I3"
+      "I1"
     ],
     "generation_method": "auto"
   },

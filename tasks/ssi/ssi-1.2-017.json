@@ -16,9 +16,7 @@
     "os_analogy": "Rootkit that modifies /etc/profile to re-execute on every login. Absence of file integrity monitoring (AIDE, Tripwire, SIP) means the modification goes undetected.",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I2",
-      "I4"
+      "I1"
     ],
     "generation_method": "auto"
   },

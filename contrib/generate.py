@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SafeClawBench — Unified Task Generator
+SafeClawArena — Unified Task Generator
 
 Discovers all category modules in contrib/categories/ and generates task JSONs.
 
@@ -27,11 +27,11 @@ from categories._shared import write_task_file
 
 def main():
     parser = argparse.ArgumentParser(
-        description="SafeClawBench unified task generator",
+        description="SafeClawArena unified task generator",
     )
     parser.add_argument(
         "--dimension",
-        choices=["SSI", "SPE", "ACDF"],
+        choices=["SSI", "PSE", "CDF"],
         help="Generate tasks for one dimension only",
     )
     parser.add_argument(

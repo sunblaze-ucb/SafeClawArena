@@ -1,10 +1,10 @@
 """
-SafeClawBench Category Registry — Auto-discovers category modules.
+SafeClawArena Category Registry — Auto-discovers category modules.
 
 Each category module is a Python file in this package that exports a CATEGORY dict:
 
     CATEGORY = {
-        "dimension": "SSI",           # "SSI" | "SPE" | "ACDF"
+        "dimension": "SSI",           # "SSI" | "PSE" | "CDF"
         "category": "1.7",            # e.g., "1.1", "2.3", "3.7"
         "category_name": "My New Attack",
         "generate": generate,         # callable(ctx: GenerationContext) -> list[dict]
@@ -31,7 +31,7 @@ class GenerationContext:
 
     def next_id(self, dimension: str, category: str) -> str:
         """Generate next task ID like 'ssi-1.1-001'."""
-        prefix = {"SSI": "ssi", "SPE": "spe", "ACDF": "acdf"}[dimension]
+        prefix = {"SSI": "ssi", "PSE": "pse", "CDF": "cdf"}[dimension]
         key = f"{prefix}-{category}"
         self._counters.setdefault(key, 0)
         self._counters[key] += 1

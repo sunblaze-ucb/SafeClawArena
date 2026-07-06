@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SafeClawBench — Task JSON Validator
+SafeClawArena — Task JSON Validator
 
 Validates task JSON files against structural requirements before running
 them through judge.py.
@@ -24,7 +24,7 @@ VALID_CHECK_TYPES = {
     "output_contains", "output_regex", "output_not_contains",
     "taint_detected_in_output", "taint_detected_in_tool_call",
     "taint_detected_in_memory", "taint_detected_in_log",
-    "taint_detected_in_gog_calls", "taint_detected_in_workspace_files",
+    "taint_detected_in_sim_google_calls", "taint_detected_in_workspace_files",
     "taint_detected_in_auth_profiles", "taint_detected_in_file",
     "file_created", "file_deleted", "file_modified", "file_contains", "file_not_contains",
     "http_route_exists", "network_call_made",
@@ -35,11 +35,11 @@ VALID_CHECK_TYPES = {
     "refusal_detected", "credential_exposed",
 }
 
-VALID_METRICS = {"SSI-Score", "SPE-Score", "ACDF-Score"}
+VALID_METRICS = {"SSI-Score", "PSE-Score", "CDF-Score"}
 
-VALID_DIMENSIONS = {"SSI", "SPE", "ACDF"}
+VALID_DIMENSIONS = {"SSI", "PSE", "CDF"}
 
-GOG_DATA_PATH_PREFIXES = {
+SIM_GOOGLE_DATA_PATH_PREFIXES = {
     "gmail/inbox/", "drive/files/", "calendar/", "chat/spaces/",
     "tasks/", "contacts/", "keep/", "sheets/data/", "groups/",
 }
@@ -154,7 +154,7 @@ class TaskValidator:
     def _check_taint_assets(self):
         assets = self.task.get("taint_assets", [])
         if not assets:
-            self.warn("No taint_assets defined — ACDF scoring won't work")
+            self.warn("No taint_assets defined — CDF scoring won't work")
             return
         total_weight = sum(a.get("severity_weight", 0) for a in assets)
         if abs(total_weight - 1.0) > 0.15:
@@ -184,14 +184,14 @@ class TaskValidator:
                 )
 
     def _check_gog_data_paths(self):
-        """Verify gog_data paths follow conventions."""
-        gog_data = self.task.get("environment", {}).get("gog_data", [])
-        for entry in gog_data:
+        """Verify sim_google_data paths follow conventions."""
+        sim_google_data = self.task.get("environment", {}).get("sim_google_data", [])
+        for entry in sim_google_data:
             path = entry.get("path", "")
-            if not any(path.startswith(prefix) for prefix in GOG_DATA_PATH_PREFIXES):
+            if not any(path.startswith(prefix) for prefix in SIM_GOOGLE_DATA_PATH_PREFIXES):
                 self.warn(
-                    f"gog_data path '{path}' doesn't match known conventions: "
-                    f"{sorted(GOG_DATA_PATH_PREFIXES)}"
+                    f"sim_google_data path '{path}' doesn't match known conventions: "
+                    f"{sorted(SIM_GOOGLE_DATA_PATH_PREFIXES)}"
                 )
 
     def _check_timeouts(self):
@@ -232,7 +232,7 @@ def validate_file(filepath: Path) -> tuple[int, int]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate SafeClawBench task JSON files")
+    parser = argparse.ArgumentParser(description="Validate SafeClawArena task JSON files")
     parser.add_argument("targets", nargs="+", help="Task JSON files or directories")
     parser.add_argument("--recursive", "-r", action="store_true", help="Search directories recursively")
     args = parser.parse_args()

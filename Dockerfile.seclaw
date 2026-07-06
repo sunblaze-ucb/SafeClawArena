@@ -34,7 +34,7 @@ RUN echo '{ \
   "security": { "prohibitedCommands": [], "inputValidationEnabled": false, "outputValidationEnabled": false, "executionLogEnabled": true, "postExecutionAuditEnabled": false, "skillAuditEnabled": false } \
 }' | python3 -m json.tool > /root/.seclaw/config.json
 
-# Install gog CLI placeholder (will be overwritten by reset_env.sh)
-RUN touch /usr/local/bin/gog && chmod +x /usr/local/bin/gog
+# Install Sim-Google CLI placeholder (will be overwritten by reset_env.sh)
+RUN touch /usr/local/bin/sim-google && chmod +x /usr/local/bin/sim-google
 
 CMD ["sleep", "infinity"]

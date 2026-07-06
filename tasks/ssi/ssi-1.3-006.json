@@ -15,8 +15,7 @@
     "os_analogy": "Capability escalation: a process with CAP_NET_ADMIN escalates to CAP_SYS_ADMIN through kernel vulnerability, gaining full system control",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I3"
+      "I1"
     ],
     "generation_method": "auto"
   },

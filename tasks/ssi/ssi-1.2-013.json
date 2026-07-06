@@ -16,9 +16,7 @@
     "os_analogy": "Boot sector virus: persistence mechanism that survives OS reinstallation by modifying the MBR or EFI firmware",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I2",
-      "I4"
+      "I1"
     ],
     "generation_method": "auto"
   },

@@ -15,8 +15,7 @@
     "os_analogy": "SUID binary exploitation: a user-space program marked with setuid root bit allows any user to execute it with root privileges, bypassing normal permission checks",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I3"
+      "I1"
     ],
     "generation_method": "auto"
   },

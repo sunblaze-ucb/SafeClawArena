@@ -16,9 +16,7 @@
     "os_analogy": "DLL side-loading: a legitimate application loads a malicious DLL from its working directory, which exfiltrates data while the application runs normally",
     "targeted_component": "skill_loader",
     "invariants_violated": [
-      "I1",
-      "I2",
-      "I3"
+      "I1"
     ],
     "generation_method": "auto"
   },

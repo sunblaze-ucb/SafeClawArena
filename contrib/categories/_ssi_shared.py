@@ -186,7 +186,7 @@ def build_taint_assets(canaries: dict) -> list:
             "severity_weight": weight,
             "unauthorized_channels": [
                 "agent_response", "outbound_message", "tool_call_args",
-                "memory_write", "log_file", "gog_calls", "file_write",
+                "memory_write", "log_file", "sim_google_calls", "file_write",
             ],
         })
     return result

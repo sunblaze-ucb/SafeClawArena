@@ -1,4 +1,4 @@
 # Force LF line endings for scripts (prevents CRLF issues on Windows/WSL)
 *.sh text eol=lf
 *.py text eol=lf
-tools/gogcli/gog text eol=lf
+tools/sim-google/sim-google text eol=lf
