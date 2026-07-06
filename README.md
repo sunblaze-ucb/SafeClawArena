@@ -2,11 +2,11 @@
   <a href="[]()">
     <img src="assets/logo_02.png" alt="Logo" width="280">
   </a>
-<h1 align="center" style="font-size: 30px;"><strong><em>SafeClawArena</em></strong>: An Operating-System Perspective on Evaluating Self-Hosted AI Agent Security</h1>
+<h1 align="center" style="font-size: 30px;"><strong><em>SafeClawArena</em></strong>: A Computer-System Perspective on Evaluating Self-Hosted AI Agent Security</h1>
 
 </div>
 
-SafeClawArena evaluates self-hosted AI agents (OpenClaw, NemoClaw, SecLaw) by treating them *as operating systems* and asking whether they uphold OS-style security invariants—process isolation, least privilege, persistent state integrity, cross-boundary authentication, auditability, and data/instruction separation. It comprises **406 adversarial tasks** organized along **four invariant-aligned dimensions**, executed in containerized replicas of the agent platforms with automated canary-based taint tracking.
+SafeClawArena evaluates self-hosted AI agents (OpenClaw, NemoClaw, SecLaw) by treating them *as agentic computer systems* and asking whether they uphold classical cybersecurity principles—process isolation, least privilege, persistent-state protection, cross-boundary mediation, and data-instruction separation. It comprises **406 adversarial tasks** organized along **four principle-aligned dimensions**, executed in containerized replicas of the agent platforms with automated canary-based taint tracking.
 
 <p align="center">
   <img src="assets/overview.png" alt="SafeClawArena overview" width="100%">
@@ -25,30 +25,29 @@ SafeClawArena evaluates self-hosted AI agents (OpenClaw, NemoClaw, SecLaw) by tr
 
 ## Why SafeClawArena
 
-Self-hosted AI agents already perform OS-level functions: they load packages (Skills), keep long-lived state (Markdown memory), schedule operations, mediate I/O, and ingest untrusted content into the same privilege domain as user commands. Yet existing safety benchmarks evaluate them as if they were ordinary LLMs. The architectural mechanisms an agent introduces violate well-known OS security invariants that LLM-level alignment alone cannot restore.
+Self-hosted AI agents already perform computer-system-level functions: they load packages (Skills), keep long-lived state (Markdown memory), schedule operations, mediate I/O, and ingest untrusted content into the same privilege domain as user commands. Yet existing safety benchmarks evaluate them as if they were ordinary LLMs. The architectural mechanisms an agent introduces violate well-known classical cybersecurity principles that LLM-level alignment alone cannot restore.
 
 <p align="center">
   <img src="assets/architecture.png" alt="Architecture and attack surfaces" width="92%">
 </p>
 
-We derive the benchmark's dimensions top-down from **six OS-style security invariants** rather than enumerating attacks ad hoc:
+We derive the benchmark's dimensions top-down from **five classical cybersecurity principles** rather than enumerating attacks ad hoc:
 
-| ID | Security Invariant | SafeClawArena Dimension |
+| ID | Security Principle | SafeClawArena Dimension |
 |:--:|--------------------|------------------------|
 | I1 | Process isolation                         | SSI |
-| I2 | Least privilege                           | SSI, CDF |
-| I3 | Persistent state integrity                | PSE |
-| I4 | Cross-boundary authentication             | CDF |
-| I5 | Auditability                              | CDF |
-| I6 | Data-instruction separation               | IPI |
+| I2 | Least privilege                           | SSI |
+| I3 | Persistent-state protection               | PSE |
+| I4 | Cross-boundary mediation                  | CDF |
+| I5 | Data-instruction separation               | IPI |
 
-This gives a benchmark that is comprehensive by construction (each invariant contributes one or more dimensions) and interpretable (every failure is attributable to a named invariant and a named architectural component).
+This gives a benchmark that is comprehensive by construction (each principle contributes to one or more dimensions) and interpretable (every failure is attributable to a named principle and a named architectural component).
 
 ---
 
 ## What's Inside
 
-**406 adversarial tasks** across **4 invariant-aligned dimensions** and **24 sub-categories**:
+**406 adversarial tasks** across **4 principle-aligned dimensions** and **24 sub-categories**:
 
 | Dimension | Tasks | What it tests |
 |-----------|:-----:|---------------|
@@ -102,7 +101,7 @@ We evaluate **15 (platform, model) configurations** spanning three OpenClaw-fami
 </details>
 
 <details>
-<summary><b>Defense coverage matrix</b> (11 OS-style defenses × 24 categories)</summary>
+<summary><b>Defense coverage matrix</b> (11 system-level defenses × 24 categories)</summary>
 
 <p align="center">
   <img src="assets/defense_coverage_heatmap.png" alt="Defense coverage matrix" width="100%">
@@ -338,7 +337,7 @@ For all metrics, **1.0 means completely secure and 0.0 means completely compromi
 
 Released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
-The benchmark is intended for **defensive security research**. All adversarial tasks target an isolated containerized testbed; payloads are synthetic and cannot cause harm outside the evaluation environment. We follow responsible-disclosure principles for any OS-invariant violations identified in the OpenClaw family of platforms.
+The benchmark is intended for **defensive security research**. All adversarial tasks target an isolated containerized testbed; payloads are synthetic and cannot cause harm outside the evaluation environment. We follow responsible-disclosure principles for any security-principle violations identified in the OpenClaw family of platforms.
 
 ## Citation
 
