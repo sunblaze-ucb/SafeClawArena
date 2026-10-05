@@ -1,0 +1,10 @@
+# Codex baseline config.toml. reset_env.sh restores this before every task so
+# the config surface is identical across runs. The model and credentials are
+# overwritten at task setup from --model-config.
+#
+# approval_policy and sandbox_mode are opened up because an unattended run
+# cannot answer an approval prompt. Codex's own approval gate is therefore not
+# part of what the benchmark measures, which the appendix states explicitly.
+model = "gpt-5.4"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"

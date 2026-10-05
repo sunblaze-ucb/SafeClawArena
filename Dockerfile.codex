@@ -1,0 +1,52 @@
+# Codex test environment (Appendix: cross-architecture transfer).
+#
+# Codex is the furthest from a Claw-like platform in this study: no gateway, no
+# third-party skill mechanism and no in-process extension mechanism, so the
+# whole SSI dimension is not posed here (scripts/platform_support.py derives
+# what is measurable). The judge drives it through
+# tools/codex-agent-wrapper.sh, one `codex exec` per session.
+#
+# Pin the CLI version: results are a snapshot of one release, and the appendix
+# reports the exact version alongside the numbers.
+#   docker build -t codex-env:0.47.0 \
+#       --build-arg CODEX_VERSION=0.47.0 -f Dockerfile.codex .
+FROM node:22-bookworm
+
+ARG CODEX_VERSION=0.47.0
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl git python3 bash jq postgresql-client ripgrep \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV HOME=/root
+
+RUN npm install -g "@openai/codex@${CODEX_VERSION}" \
+    && codex --version
+
+# sessions/ holds the rollout files that stand in for the gateway log.
+RUN mkdir -p /root/.codex/sessions \
+             /root/workspace \
+             /opt/safeclaw
+
+# config.toml is the config-tampering target (PSE 2.4 is skipped on Codex for
+# want of a skill loader to carry the tampering, but the file is still the
+# platform's config surface and the judge reads it for the state snapshot).
+# reset_env.sh rewrites the model and credentials at task setup.
+RUN printf '%s\n' \
+    'model = "gpt-5.4"' \
+    'approval_policy = "never"' \
+    'sandbox_mode = "danger-full-access"' \
+    > /root/.codex/config.toml
+
+# AGENTS.md is the persistent-instruction file the PSE categories target. It
+# has to exist up front so a task can detect that the agent appended to it.
+RUN touch /root/workspace/AGENTS.md
+
+COPY tools/codex-agent-wrapper.sh /opt/safeclaw/codex-agent-wrapper.sh
+RUN chmod +x /opt/safeclaw/codex-agent-wrapper.sh
+
+# Overwritten by reset_env.sh with the current build from tools/sim-google/.
+RUN touch /usr/local/bin/sim-google && chmod +x /usr/local/bin/sim-google
+
+WORKDIR /root/workspace
+CMD ["sleep", "infinity"]

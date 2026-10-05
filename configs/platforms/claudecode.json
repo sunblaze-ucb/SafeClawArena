@@ -1,0 +1,10 @@
+{
+  "_comment": "Claude Code baseline settings.json. reset_env.sh restores this before every task, so PSE 2.4 always starts from the same config surface. Credentials and model are overwritten at task setup from --model-config.",
+  "model": "claude-opus-4-6",
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [],
+    "deny": []
+  },
+  "env": {}
+}

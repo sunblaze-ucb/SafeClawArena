@@ -33,6 +33,15 @@ CONTAINER="${SAFECLAW_CONTAINER:-openclaw-env}"
 OPENCLAW_HOME="${SAFECLAW_OPENCLAW_HOME:-/root/.openclaw}"
 WORKSPACE="${SAFECLAW_WORKSPACE:-${OPENCLAW_HOME}/workspace}"
 GATEWAY_PORT=18789
+# Platform identity comes from judge.py. NO_GATEWAY covers every CLI-transport
+# platform (SeClaw, Claude Code, Codex): there is no daemon to stop, start or
+# health-check, and no gateway log to read.
+PLATFORM="${SAFECLAW_PLATFORM:-openclaw}"
+NO_GATEWAY="${SAFECLAW_NO_GATEWAY:-0}"
+# Where this platform keeps the files the tasks target. Defaults match OpenClaw.
+MEMORY_PATH="${SAFECLAW_MEMORY_PATH:-${WORKSPACE}/MEMORY.md}"
+CONFIG_PATH="${SAFECLAW_CONFIG_PATH:-${OPENCLAW_HOME}/openclaw.json}"
+SKILLS_DIR="${SAFECLAW_SKILLS_DIR:-${WORKSPACE}/skills}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCHMARK_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
@@ -41,6 +50,10 @@ BASELINE_DIR="${BENCHMARK_DIR}/configs/platforms"
 if [ "$OPENCLAW_HOME" = "/root/.openclaw" ]; then
     BASELINE_CONFIG="${BASELINE_DIR}/openclaw.json"
     BASELINE_AUTH="${BASELINE_DIR}/openclaw_auth-profiles.json"
+elif [ "$PLATFORM" = "claudecode" ]; then
+    BASELINE_CONFIG="${BASELINE_DIR}/claudecode.json"
+elif [ "$PLATFORM" = "codex" ]; then
+    BASELINE_CONFIG="${BASELINE_DIR}/codex.toml"
 elif [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
     # Seclaw: config.json contains providers directly (no separate auth-profiles)
     BASELINE_CONFIG="${BASELINE_DIR}/seclaw.json"
@@ -170,8 +183,8 @@ check_container() {
 # Gateway Lifecycle
 # ============================================================================
 stop_gateway() {
-    # Seclaw: no gateway to stop
-    if [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
+    # No daemon on CLI-transport platforms (SeClaw, Claude Code, Codex)
+    if [ "$NO_GATEWAY" = "1" ]; then
         return 0
     fi
     log "Stopping gateway..."
@@ -197,9 +210,10 @@ stop_gateway() {
 }
 
 start_gateway() {
-    # Seclaw: no gateway needed (uses CLI transport)
-    if [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
-        log "Skipping gateway (Seclaw uses CLI transport)."
+    # No daemon to start on CLI-transport platforms; each session is its own
+    # process, which is also how those platforms get a fresh context.
+    if [ "$NO_GATEWAY" = "1" ]; then
+        log "Skipping gateway (${PLATFORM} uses CLI transport)."
         return 0
     fi
 
@@ -248,8 +262,8 @@ if changed:
 }
 
 wait_for_healthy() {
-    # Seclaw: no gateway to check
-    if [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
+    # Nothing to health-check without a daemon
+    if [ "$NO_GATEWAY" = "1" ]; then
         return 0
     fi
     if $DRY_RUN; then
@@ -392,10 +406,11 @@ restore_config() {
         return 0
     fi
 
-    # Seclaw uses config.json; OpenClaw/NemoClaw use openclaw.json
-    if [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
-        docker cp "$BASELINE_CONFIG" "${CONTAINER}:${OPENCLAW_HOME}/config.json"
-        log_verbose "  Restored: config.json (Seclaw)"
+    # Each platform names its config file differently; CONFIG_PATH carries the
+    # right one (openclaw.json, config.json, settings.json, config.toml).
+    if [ "$PLATFORM" != "openclaw" ] && [ "$PLATFORM" != "nemoclaw" ]; then
+        docker cp "$BASELINE_CONFIG" "${CONTAINER}:${CONFIG_PATH}"
+        log_verbose "  Restored: $(basename "$CONFIG_PATH") (${PLATFORM})"
     else
         docker cp "$BASELINE_CONFIG" "${CONTAINER}:${OPENCLAW_HOME}/openclaw.json"
         log_verbose "  Restored: openclaw.json"
@@ -408,9 +423,10 @@ restore_config() {
 }
 
 restore_workspace_bootstrap() {
-    # Seclaw: keep original bootstrap files from the image
-    if [ "$OPENCLAW_HOME" = "/root/.seclaw" ]; then
-        log "Skipping bootstrap restore (Seclaw uses its own templates)."
+    # The OpenClaw bootstrap files (AGENTS.md, SOUL.md, ...) have no counterpart
+    # on the CLI-transport platforms, which ship their own workspace layout.
+    if [ "$NO_GATEWAY" = "1" ]; then
+        log "Skipping bootstrap restore (${PLATFORM} uses its own templates)."
         return 0
     fi
 
