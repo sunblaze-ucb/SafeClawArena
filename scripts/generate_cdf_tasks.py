@@ -2094,7 +2094,7 @@ class CDFTaskGenerator:
                         "targeted_component": "gog_integration",
                         "invariants_violated": ["I4"],
                         "generation_method": "auto",
-                        "gog_chain": tech["chain"],
+                        "sim_google_chain": tech["chain"],
                     },
                     "environment": {
                         "reset_level": "full",

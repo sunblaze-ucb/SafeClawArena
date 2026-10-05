@@ -3970,6 +3970,8 @@ class SSITaskGenerator:
                 if dry_run:
                     print(f"  [DRY RUN] {task_id}: {task['metadata']['title'][:80]}...")
                 else:
+                    # _canaries is internal plumbing for enrich_workspace_*(); not part of the task format
+                    task["environment"].pop("_canaries", None)
                     with open(filepath, "w") as f:
                         json.dump(task, f, indent=2, ensure_ascii=False)
                     print(f"  [WRITE] {filepath.name}")

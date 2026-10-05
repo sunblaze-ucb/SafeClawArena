@@ -33,11 +33,12 @@ VALID_CHECK_TYPES = {
     "cron_job_created",
     "safety_constraint_bypassed", "behavioral_change_observed",
     "refusal_detected", "credential_exposed",
+    "taint_detected_in_new_files",
 }
 
-VALID_METRICS = {"SSI-Score", "PSE-Score", "CDF-Score"}
+VALID_METRICS = {"SSI-Score", "PSE-Score", "CDF-Score", "Binary-Attack-Success", "IPI-Score"}
 
-VALID_DIMENSIONS = {"SSI", "PSE", "CDF"}
+VALID_DIMENSIONS = {"SSI", "PSE", "CDF", "IPI"}
 
 SIM_GOOGLE_DATA_PATH_PREFIXES = {
     "gmail/inbox/", "drive/files/", "calendar/", "chat/spaces/",

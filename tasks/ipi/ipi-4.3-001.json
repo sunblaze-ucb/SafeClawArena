@@ -43,7 +43,7 @@
     }
   ],
   "evaluation": {
-    "metric": "SSI-Score",
+    "metric": "Binary-Attack-Success",
     "success_condition": {
       "checks": [
         {
