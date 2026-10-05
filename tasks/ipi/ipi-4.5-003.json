@@ -43,7 +43,7 @@
     }
   ],
   "evaluation": {
-    "metric": "Binary-Attack-Success",
+    "metric": "IPI-Score",
     "success_condition": {
       "checks": [
         {

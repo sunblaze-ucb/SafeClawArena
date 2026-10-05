@@ -800,18 +800,18 @@ if env.get("git_init"):
     print(f"  Git: initialized repo with initial commit")
 
 # 3a. Provision sim-google data store (emails, calendar events, chat messages, etc.)
-gog_data_dir = "/tmp/sim_google_data"
-dexec(f"rm -rf {gog_data_dir} && mkdir -p {gog_data_dir}")
+sim_google_data_dir = "/tmp/sim_google_data"
+dexec(f"rm -rf {sim_google_data_dir} && mkdir -p {sim_google_data_dir}")
 
-for gog_item in env.get("sim_google_data", []):
-    gog_path = gog_item["path"]  # e.g., "gmail/inbox/config-drift.eml"
-    gog_content = gog_item.get("content", "")
-    full_gog_path = f"{gog_data_dir}/{gog_path}"
-    parent = os.path.dirname(full_gog_path)
+for sim_google_item in env.get("sim_google_data", []):
+    sim_google_path = sim_google_item["path"]  # e.g., "gmail/inbox/config-drift.eml"
+    sim_google_content = sim_google_item.get("content", "")
+    full_sim_google_path = f"{sim_google_data_dir}/{sim_google_path}"
+    parent = os.path.dirname(full_sim_google_path)
     dexec(f"mkdir -p '{parent}'")
-    docker_cp_content(gog_content, full_gog_path)
-    dexec(f"chmod a+r '{full_gog_path}'")
-    print(f"  Gog data: {gog_path} ({len(gog_content)} bytes)")
+    docker_cp_content(sim_google_content, full_sim_google_path)
+    dexec(f"chmod a+r '{full_sim_google_path}'")
+    print(f"  Sim-Google data: {sim_google_path} ({len(sim_google_content)} bytes)")
 
 # Also migrate any workspace files in inbox/ or incoming/ to sim-google store
 # (backward compatibility: if tasks still use workspace_files for emails)
@@ -820,19 +820,19 @@ for wf in env.get("workspace_files", []):
     if path.startswith("inbox/") or path.startswith("incoming/"):
         content = wf.get("content", "")
         if path.endswith(".eml"):
-            gog_path = f"{gog_data_dir}/gmail/inbox/{os.path.basename(path)}"
+            sim_google_path = f"{sim_google_data_dir}/gmail/inbox/{os.path.basename(path)}"
         elif path.endswith(".json"):
-            gog_path = f"{gog_data_dir}/calendar/{os.path.basename(path)}"
+            sim_google_path = f"{sim_google_data_dir}/calendar/{os.path.basename(path)}"
         else:
             continue
-        parent = os.path.dirname(gog_path)
+        parent = os.path.dirname(sim_google_path)
         dexec(f"mkdir -p '{parent}'")
-        docker_cp_content(content, gog_path)
-        print(f"  Gog data (migrated): {path} -> {gog_path}")
+        docker_cp_content(content, sim_google_path)
+        print(f"  Sim-Google data (migrated): {path} -> {sim_google_path}")
 
 # Set SIM_GOOGLE_DATA_DIR for the container environment
 _user_home = os.path.dirname(openclaw_home)
-dexec(f"echo 'export SIM_GOOGLE_DATA_DIR={gog_data_dir}' >> {_user_home}/.bashrc")
+dexec(f"echo 'export SIM_GOOGLE_DATA_DIR={sim_google_data_dir}' >> {_user_home}/.bashrc")
 
 # 3b. Merge canary profiles into auth-profiles.json (preserves real working keys)
 auth_pf = env.get("auth_profiles_file", {})

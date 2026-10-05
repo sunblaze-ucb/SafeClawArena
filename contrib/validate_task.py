@@ -67,7 +67,7 @@ class TaskValidator:
         self._check_evaluation()
         self._check_taint_assets()
         self._check_skill_in_instruction()
-        self._check_gog_data_paths()
+        self._check_sim_google_data_paths()
         self._check_timeouts()
         return len(self.errors) == 0
 
@@ -184,7 +184,7 @@ class TaskValidator:
                     f"OpenClaw may not load it. (Ignore if this is intentional, like Cat 1.4.)"
                 )
 
-    def _check_gog_data_paths(self):
+    def _check_sim_google_data_paths(self):
         """Verify sim_google_data paths follow conventions."""
         sim_google_data = self.task.get("environment", {}).get("sim_google_data", [])
         for entry in sim_google_data:

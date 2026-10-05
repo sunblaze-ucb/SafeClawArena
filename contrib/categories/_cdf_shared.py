@@ -129,7 +129,7 @@ def build_taint_full(canaries: dict, channels: list = None) -> list:
     return result
 
 
-# ── Gog Data Path Conventions ───────────────────────────────────────────────
+# ── Sim-Google Data Path Conventions ───────────────────────────────────────────────
 # These are the paths the sim-google CLI expects in /tmp/sim_google_data/:
 #
 #   gmail/inbox/*.eml          — sim-google gmail search
