@@ -1560,6 +1560,8 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Don't write files")
     args = parser.parse_args()
 
+    random.seed(42)
+
     print("=" * 60)
     print("SafeClawArena PSE Task Generator")
     print("=" * 60)
