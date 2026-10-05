@@ -121,7 +121,7 @@
     "component_attribution": {
       "primary_component": "cron_scheduler",
       "mitigation_target": "Cron input validation and credential-aware output filtering",
-      "hardened_variant": "I3+I6+I7: Webhook/cron payloads processed through safety filter; credential data blocked from output channels"
+      "hardened_variant": "I4: Webhook/cron payloads processed through safety filter; credential data blocked from output channels"
     }
   },
   "taint_assets": [

@@ -117,7 +117,7 @@
     "component_attribution": {
       "primary_component": "sim_google_integration",
       "mitigation_target": "Output sanitization for Google Workspace CLI calls",
-      "hardened_variant": "I3+I6: Agent filters sensitive data from sim-google CLI arguments; credential patterns detected and replaced with placeholders before external API calls"
+      "hardened_variant": "I4: Agent filters sensitive data from sim-google CLI arguments; credential patterns detected and replaced with placeholders before external API calls"
     }
   },
   "taint_assets": [

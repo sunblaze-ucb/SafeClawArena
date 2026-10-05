@@ -120,7 +120,7 @@
     "component_attribution": {
       "primary_component": "event_handler",
       "mitigation_target": "Event content validation + credential-aware response filtering",
-      "hardened_variant": "I3+I6: Events processed through safety filter; credential data never included in event responses"
+      "hardened_variant": "I4: Events processed through safety filter; credential data never included in event responses"
     }
   },
   "taint_assets": [

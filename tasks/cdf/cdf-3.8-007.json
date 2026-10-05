@@ -128,7 +128,7 @@
     "component_attribution": {
       "primary_component": "logging_system",
       "mitigation_target": "Log redaction + access control + integrity protection",
-      "hardened_variant": "I7: Logs redacted at write time; log files access-controlled; append-only with integrity verification"
+      "hardened_variant": "I4: Logs redacted at write time; log files access-controlled; append-only with integrity verification"
     }
   },
   "taint_assets": [

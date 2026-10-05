@@ -112,7 +112,7 @@
     "component_attribution": {
       "primary_component": "context_manager",
       "mitigation_target": "Cross-task context boundary enforcement",
-      "hardened_variant": "I3+I7: Sensitive data tagged in context and stripped before cross-boundary operations"
+      "hardened_variant": "I4: Sensitive data tagged in context and stripped before cross-boundary operations"
     }
   },
   "taint_assets": [

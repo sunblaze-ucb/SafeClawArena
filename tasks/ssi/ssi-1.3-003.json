@@ -99,7 +99,7 @@
     "component_attribution": {
       "primary_component": "skill_loader",
       "mitigation_target": "Skill privilege boundary enforcement",
-      "hardened_variant": "I3: Skills cannot override exec policies; safety enforced by runtime"
+      "hardened_variant": "I1: Skills cannot override exec policies; safety enforced by runtime"
     }
   },
   "taint_assets": [

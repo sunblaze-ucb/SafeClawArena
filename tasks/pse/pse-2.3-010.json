@@ -111,7 +111,7 @@
     "component_attribution": {
       "primary_component": "memory_system",
       "mitigation_target": "Sensitivity-aware memory writes",
-      "hardened_variant": "I4+I5: Memory system detects and blocks storage of credentials, PII, and other sensitive data"
+      "hardened_variant": "I3: Memory system detects and blocks storage of credentials, PII, and other sensitive data"
     }
   },
   "taint_assets": [

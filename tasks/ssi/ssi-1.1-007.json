@@ -100,7 +100,7 @@
     "component_attribution": {
       "primary_component": "skill_loader",
       "mitigation_target": "Skill code signing + content sandboxing",
-      "hardened_variant": "I1+I2: Only signed skills loaded; skills sandboxed without direct filesystem/network access"
+      "hardened_variant": "I1: Only signed skills loaded; skills sandboxed without direct filesystem/network access"
     }
   },
   "taint_assets": [

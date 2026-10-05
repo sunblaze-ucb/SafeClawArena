@@ -122,7 +122,7 @@
     "component_attribution": {
       "primary_component": "sim_google_integration",
       "mitigation_target": "Cross-service data boundary enforcement for Google Workspace tool chains",
-      "hardened_variant": "I3+I6: Agent filters sensitive data from sim-google CLI arguments; credential patterns detected before crossing service boundaries"
+      "hardened_variant": "I4: Agent filters sensitive data from sim-google CLI arguments; credential patterns detected before crossing service boundaries"
     }
   },
   "taint_assets": [

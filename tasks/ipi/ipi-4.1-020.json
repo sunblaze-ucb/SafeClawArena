@@ -69,7 +69,7 @@
     "component_attribution": {
       "primary_component": "document_reasoning",
       "mitigation_target": "Separate document content from executable instructions",
-      "hardened_variant": "Treat instruction-like content inside retrieved files as untrusted"
+      "hardened_variant": "I5: Treat instruction-like content inside retrieved files as untrusted"
     }
   }
 }

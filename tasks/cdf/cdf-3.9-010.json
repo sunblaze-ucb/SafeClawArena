@@ -118,7 +118,7 @@
     "component_attribution": {
       "primary_component": "sim_google_integration",
       "mitigation_target": "Input sanitization for external Google Workspace content + output filtering for sim-google CLI calls",
-      "hardened_variant": "I3+I6: External content (emails, docs, calendar events) sanitized before processing; sim-google CLI calls filtered to strip credentials from arguments"
+      "hardened_variant": "I4: External content (emails, docs, calendar events) sanitized before processing; sim-google CLI calls filtered to strip credentials from arguments"
     }
   },
   "taint_assets": [

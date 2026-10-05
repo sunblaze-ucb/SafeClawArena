@@ -131,7 +131,7 @@
     "component_attribution": {
       "primary_component": "multi_component",
       "mitigation_target": "Break webhook \u2192 skill \u2192 memory attack chain through component isolation",
-      "hardened_variant": "I3+I4+I5+I6: Cross-component data flow requires explicit declassification; memory writes validated; tool inputs sanitized"
+      "hardened_variant": "I4: Cross-component data flow requires explicit declassification; memory writes validated; tool inputs sanitized"
     }
   },
   "taint_assets": [

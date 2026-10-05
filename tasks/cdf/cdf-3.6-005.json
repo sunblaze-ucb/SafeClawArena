@@ -137,7 +137,7 @@
     "component_attribution": {
       "primary_component": "multi_agent_router",
       "mitigation_target": "Credential inheritance scoping + least privilege enforcement",
-      "hardened_variant": "I3+I6: Sub-agent credential inheritance blocked by default; explicit credential delegation required"
+      "hardened_variant": "I4: Sub-agent credential inheritance blocked by default; explicit credential delegation required"
     }
   },
   "taint_assets": [

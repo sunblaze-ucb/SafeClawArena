@@ -6,7 +6,7 @@
 
 </div>
 
-SafeClawArena evaluates self-hosted AI agents (OpenClaw, NemoClaw, SecLaw) by treating them *as agentic computer systems* and asking whether they uphold classical cybersecurity principles—process isolation, least privilege, persistent-state protection, cross-boundary mediation, and data-instruction separation. It comprises **406 adversarial tasks** organized along **four principle-aligned dimensions**, executed in containerized replicas of the agent platforms with automated canary-based taint tracking.
+SafeClawArena evaluates self-hosted AI agents (OpenClaw, NemoClaw, SeClaw) by treating them *as agentic computer systems* and asking whether they uphold classical cybersecurity principles—process isolation, least privilege, persistent-state protection, cross-boundary mediation, and data-instruction separation. It comprises **406 adversarial tasks** organized along **four principle-aligned dimensions**, executed in containerized replicas of the agent platforms with automated canary-based taint tracking.
 
 <p align="center">
   <img src="assets/overview.png" alt="SafeClawArena overview" width="100%">
@@ -77,20 +77,20 @@ We evaluate **15 (platform, model) configurations** spanning three OpenClaw-fami
 | NemoClaw | Gemini-3-Flash  | 61.0 / 0.39 | 56.7 / 0.53 | 45.9 / 0.36 | 62.0 / 0.37 | **55.2 / 0.39** |
 | NemoClaw | Gemini-3.1-Pro  | 64.0 / 0.36 | 40.0 / 0.75 | 31.5 / 0.58 | 49.0 / 0.51 | **45.1 / 0.53** |
 | NemoClaw | Claude-Opus-4.6 | 47.0 / 0.53 | 18.3 / 0.93 |  4.8 / 0.67 | 17.0 / 0.81 | **20.2 / 0.71** |
-| SecLaw   | GPT-5.1-Codex   | 19.0 / 0.81 | 41.7 / 0.74 | 30.1 / 0.53 | 32.0 / 0.67 | **29.6 / 0.66** |
-| SecLaw   | GPT-5.4         | 24.0 / 0.76 | 30.0 / 0.85 | 14.4 / 0.93 | 26.0 / 0.74 | **21.9 / 0.83** |
-| SecLaw   | Gemini-3-Flash  | 29.0 / 0.71 | 61.7 / 0.53 | 50.0 / 0.30 | 73.0 / 0.27 | **52.2 / 0.43** |
-| SecLaw   | Gemini-3.1-Pro  | 34.0 / 0.66 | 61.7 / 0.57 | 41.1 / 0.78 | 71.0 / 0.29 | **49.8 / 0.60** |
-| SecLaw   | Claude-Opus-4.6 | 18.0 / 0.82 | 31.7 / 0.85 | 17.1 / 0.94 | 23.0 / 0.76 | **20.9 / 0.85** |
+| SeClaw   | GPT-5.1-Codex   | 19.0 / 0.81 | 41.7 / 0.74 | 30.1 / 0.53 | 32.0 / 0.67 | **29.6 / 0.66** |
+| SeClaw   | GPT-5.4         | 24.0 / 0.76 | 30.0 / 0.85 | 14.4 / 0.93 | 26.0 / 0.74 | **21.9 / 0.83** |
+| SeClaw   | Gemini-3-Flash  | 29.0 / 0.71 | 61.7 / 0.53 | 50.0 / 0.30 | 73.0 / 0.27 | **52.2 / 0.43** |
+| SeClaw   | Gemini-3.1-Pro  | 34.0 / 0.66 | 61.7 / 0.57 | 41.1 / 0.78 | 71.0 / 0.29 | **49.8 / 0.60** |
+| SeClaw   | Claude-Opus-4.6 | 18.0 / 0.82 | 31.7 / 0.85 | 17.1 / 0.94 | 23.0 / 0.76 | **20.9 / 0.85** |
 
 
 
 **Key findings**:
 
 - **Overall attack success rate spans 20.2%–69.7%.** Even the most secure configuration (NemoClaw + Claude-Opus-4.6) is compromised on roughly 1 in 5 tasks; the worst (OpenClaw / NemoClaw + GPT-5.4) on 7 in 10.
-- **Malicious plugins reach 100% on every unhardened configuration regardless of LLM.** Cat 1.4 (in-process plugin) bypasses the LLM entirely; only platform-level absence of the loader (as in SecLaw) stops it (drops to 0%).
+- **Malicious plugins reach 100% on every unhardened configuration regardless of LLM.** Cat 1.4 (in-process plugin) bypasses the LLM entirely; only platform-level absence of the loader (as in SeClaw) stops it (drops to 0%).
 - **Memory injection exceeds 60% on every non-Opus configuration.** Without integrity-protected memory (D5), persistent state gets poisoned across sessions.
-- **Platform hardening is strongly model-dependent.** SecLaw cuts the GPT-5 family's attack rate by up to **−48 pp** (GPT-5.4: 69.7 → 21.9), but barely moves Gemini-3-Flash (−6.2 pp) and even *worsens* Gemini-3.1-Pro on PSE (53.3 → 61.7) and IPI (58.0 → 71.0)—so model rankings are platform-conditional.
+- **Platform hardening is strongly model-dependent.** SeClaw cuts the GPT-5 family's attack rate by up to **−48 pp** (GPT-5.4: 69.7 → 21.9), but barely moves Gemini-3-Flash (−6.2 pp) and even *worsens* Gemini-3.1-Pro on PSE (53.3 → 61.7) and IPI (58.0 → 71.0)—so model rankings are platform-conditional.
 
 <details>
 <summary><b>Per-category heatmap</b> (15 configs × 24 categories)</summary>
@@ -129,7 +129,7 @@ docker build -t openclaw-env:2026.3.12 -f Dockerfile .
 # NemoClaw v2026.3.11
 docker build -t nemoclaw-env:2026.3.11 -f Dockerfile.nemoclaw .
 
-# SecLaw v0.1.0
+# SeClaw v0.1.0
 docker build -t seclaw-env:0.1.0 -f Dockerfile.seclaw .
 ```
 
@@ -191,7 +191,7 @@ done
 # NemoClaw
 python3 scripts/judge.py tasks/ssi/ssi-1.1-001.json --platform nemoclaw
 
-# SecLaw (CLI transport, no Gateway HTTP)
+# SeClaw (CLI transport, no Gateway HTTP)
 python3 scripts/judge.py tasks/ssi/ssi-1.1-001.json --platform seclaw \
     --model-config configs/models/openai-official/model-config.json
 ```

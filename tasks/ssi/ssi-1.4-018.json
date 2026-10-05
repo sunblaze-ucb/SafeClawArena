@@ -137,7 +137,7 @@
     "component_attribution": {
       "primary_component": "plugin_system",
       "mitigation_target": "Plugin code signing + process sandboxing + capability restriction",
-      "hardened_variant": "I1+I5: Plugins require code signing, run in sandboxed subprocess with restricted capabilities"
+      "hardened_variant": "I2: Plugins require code signing, run in sandboxed subprocess with restricted capabilities"
     }
   },
   "taint_assets": [

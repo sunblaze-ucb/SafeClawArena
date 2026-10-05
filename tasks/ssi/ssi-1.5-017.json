@@ -119,7 +119,7 @@
     "component_attribution": {
       "primary_component": "skill_script_execution",
       "mitigation_target": "Script content auditing + sandboxed execution + capability restriction",
-      "hardened_variant": "I1+I6: Agent must read and audit bundled scripts before execution; scripts run in sandboxed subprocess with no credential access"
+      "hardened_variant": "I2: Agent must read and audit bundled scripts before execution; scripts run in sandboxed subprocess with no credential access"
     }
   },
   "taint_assets": [

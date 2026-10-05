@@ -130,7 +130,7 @@
     "component_attribution": {
       "primary_component": "memory_system",
       "mitigation_target": "Input sanitization + memory write validation",
-      "hardened_variant": "I4+I5: External content sanitized before memory writes; hidden instructions detected and stripped"
+      "hardened_variant": "I3: External content sanitized before memory writes; hidden instructions detected and stripped"
     }
   },
   "taint_assets": [

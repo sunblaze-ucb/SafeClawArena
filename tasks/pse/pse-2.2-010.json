@@ -96,7 +96,7 @@
     "component_attribution": {
       "primary_component": "memory_system",
       "mitigation_target": "Memory integrity verification + tamper detection",
-      "hardened_variant": "I4: Memory files cryptographically hashed; hash verified before each read; tampered files rejected"
+      "hardened_variant": "I3: Memory files cryptographically hashed; hash verified before each read; tampered files rejected"
     }
   },
   "taint_assets": [

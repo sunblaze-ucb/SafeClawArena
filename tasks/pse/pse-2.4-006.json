@@ -105,7 +105,7 @@
     "component_attribution": {
       "primary_component": "config_system",
       "mitigation_target": "Configuration file integrity protection",
-      "hardened_variant": "I4+I5: Config files protected with integrity hashing and MAC; modifications require admin approval"
+      "hardened_variant": "I3: Config files protected with integrity hashing and MAC; modifications require admin approval"
     }
   },
   "taint_assets": [
