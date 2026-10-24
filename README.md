@@ -338,18 +338,3 @@ For all metrics, **1.0 means completely secure and 0.0 means completely compromi
 Released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 The benchmark is intended for **defensive security research**. All adversarial tasks target an isolated containerized testbed; payloads are synthetic and cannot cause harm outside the evaluation environment. We follow responsible-disclosure principles for any security-principle violations identified in the OpenClaw family of platforms.
-
-## Citation
-
-If you use SafeClawArena in your research, please cite:
-
-**Code**: https://github.com/sunblaze-ucb/SafeClawArena
-
-```bibtex
-@article{niu2026understanding,
-  title={Understanding and Evaluating Claw-like Agent Security Through a Computer-Systems Lens},
-  author={Niu, Peizhi and Qu, Wenjie and Gu, Shangding and Shi, Tianneng and Li, Yuankai and Tawaha, Ahmad and Alzahrani, Hend and Siu, Vincent and Li, Boyi and Wang, Chenguang and others},
-  journal={arXiv preprint arXiv:2606.30755},
-  year={2026}
-}
-```
